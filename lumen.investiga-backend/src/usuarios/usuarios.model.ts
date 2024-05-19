@@ -1,7 +1,4 @@
-import { AllowNull, AutoIncrement, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
-import { Alumno } from 'src/alumnos/alumnos.model';
-import { Asesor } from 'src/asesores/asesores.model';
-import { Profesor } from 'src/profesores/profesores.model';
+import { AllowNull, AutoIncrement, Column, CreatedAt, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
 
 @Table
 export class Usuario extends Model {
@@ -12,7 +9,17 @@ export class Usuario extends Model {
   id: number;
 
   @Column
+  name: string;
+
+  @Column
+  last_name: string;
+
+  @Column
   email: string;
+
+  @Unique
+  @Column
+  codigo: number;
 
   @Column
   password: string;
@@ -20,14 +27,8 @@ export class Usuario extends Model {
   @Column
   foto_url: string;
 
-  @HasMany(() => Alumno)
-  alumnos: Alumno[];
-
-  @HasMany(() => Profesor)
-  profesores: Profesor[];
-
-  @HasMany(() => Asesor)
-  asesores: Asesor[];
+  @Column
+  isTeacher: boolean;
 
   @CreatedAt
   creationDate: Date;

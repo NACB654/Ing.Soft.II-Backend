@@ -1,8 +1,7 @@
-import { AllowNull, AutoIncrement, BelongsTo, BelongsToMany, Column, CreatedAt, ForeignKey, HasMany, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsToMany, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 import { CursoProfesor } from 'src/cursos-profesores/cursos-profesores.model';
 import { Curso } from 'src/cursos/cursos.model';
 import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
-import { Usuario } from 'src/usuarios/usuarios.model';
 
 @Table
 export class Profesor extends Model {
@@ -13,21 +12,10 @@ export class Profesor extends Model {
   id: number;
 
   @Column
-  nombre: string;
+  name: string;
 
   @Column
-  apellido: string;
-
-  @Unique
-  @Column
-  codigo: number;
-
-  @ForeignKey(() => Usuario)
-  @Column
-  usuarioId: number;
-
-  @BelongsTo(() => Usuario)
-  usuario: Usuario;
+  last_name: string;
 
   @BelongsToMany(() => Curso, () => CursoProfesor)
   curso: Curso[];

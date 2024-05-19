@@ -1,21 +1,23 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { UsuariosService } from "./usuarios.service";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { LoginDto } from "./dto/login.dto";
 
 @Controller('usuario')
 export class UsuariosController {
     constructor(private usuariosService: UsuariosService) {}
 
     @Post('registro')
-    registrarCuenta() {
-        return this.usuariosService.registrarCuenta()
+    registrarCuenta(@Body() user: CreateUserDto) {
+        return this.usuariosService.registrarCuenta(user)
     }
 
     @Post('inicio')
-    iniciarSesion() {
-        return this.usuariosService.iniciarSesion()
+    iniciarSesion(@Body() user: LoginDto) {
+        return this.usuariosService.iniciarSesion(user)
     }
 
-    @Post('busqueda')
+    @Get('busqueda')
     realizarBusqueda() {
         return this.usuariosService.realizarBusqueda()
     }

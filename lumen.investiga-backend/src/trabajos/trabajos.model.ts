@@ -38,17 +38,29 @@ export class TrabajosInvestigacion extends Model {
   @Column
   areaId: number;
 
+  @BelongsTo(() => Area)
+  area: Area;
+
   @ForeignKey(() => Subarea)
   @Column
   subareaId: number;
+
+  @BelongsTo(() => Subarea)
+  subArea: Subarea;
 
   @ForeignKey(() => Periodo)
   @Column
   periodoId: number;
 
+  @BelongsTo(() => Periodo)
+  periodo: Periodo;
+
   @ForeignKey(() => Asesor)
   @Column
   asesorId: number;
+
+  @BelongsTo(() => Asesor)
+  asesor: Asesor;
 
   @ForeignKey(() => Profesor)
   @Column
@@ -65,7 +77,11 @@ export class TrabajosInvestigacion extends Model {
   alumno: Alumno;
 
   @ForeignKey(() => Curso)
+  @Column
   cursoId: number;
+
+  @BelongsTo(() => Curso)
+  curso: Curso;
 
   @CreatedAt
   creationDate: Date;

@@ -26,6 +26,7 @@ import { UsuariosModule } from 'src/usuarios/usuarios.module';
       database: 'lumen_db',
       autoLoadModels: true,
       synchronize: true,
+      logging: console.log,
     }),
     UsuariosModule,
     AlumnosModule,
