@@ -1,4 +1,5 @@
-import { AllowNull, AutoIncrement, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, HasMany, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { Area } from 'src/area/area.model';
 import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
 
 @Table
@@ -11,6 +12,13 @@ export class Subarea extends Model {
 
   @Column
   descripcion: string;
+
+  @ForeignKey(() => Area)
+  @Column
+  areaId: number;
+
+  @BelongsTo(() => Area)
+  area: Area;
 
   @HasMany(() => TrabajosInvestigacion)
   trabajos: TrabajosInvestigacion[]

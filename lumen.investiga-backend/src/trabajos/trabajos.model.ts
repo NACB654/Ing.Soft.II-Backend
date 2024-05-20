@@ -34,13 +34,6 @@ export class TrabajosInvestigacion extends Model {
   @BelongsToMany(() => ODS, () => ODSTrabajo)
   ods: ODS[];
 
-  @ForeignKey(() => Area)
-  @Column
-  areaId: number;
-
-  @BelongsTo(() => Area)
-  area: Area;
-
   @ForeignKey(() => Subarea)
   @Column
   subareaId: number;
