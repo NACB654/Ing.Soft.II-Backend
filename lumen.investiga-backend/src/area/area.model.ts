@@ -16,9 +16,6 @@ export class Area extends Model {
   @HasMany(() => Subarea)
   subareas: Subarea[];
 
-  @HasMany(() => TrabajosInvestigacion)
-  trabajos: TrabajosInvestigacion[];
-
   @CreatedAt
   creationDate: Date;
 
