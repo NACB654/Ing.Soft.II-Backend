@@ -14,4 +14,12 @@ export class ODSservice {
       return null;
     }
   }
+
+  async findODSbyId(odsDto: number[]) {
+    return await this.odsModel.findAll({
+      where: {
+        id: odsDto,
+      },
+    });
+  }
 }

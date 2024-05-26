@@ -10,10 +10,12 @@ import { AlumnosService } from 'src/alumnos/alumnos.service';
 import { AsesoresService } from 'src/asesores/asesores.service';
 import { Alumno } from 'src/alumnos/alumnos.model';
 import { Asesor } from 'src/asesores/asesores.model';
+import { ODSservice } from 'src/ods/ods.service';
+import { KeywordsService } from 'src/keywords/keywords.service';
 
 @Module({
     imports: [SequelizeModule.forFeature([Profesor, TrabajosInvestigacion, Alumno, Asesor, ODS, Keyword])],
     controllers: [ProfesoresController],
-    providers: [ProfesoresService, AlumnosService, AsesoresService],
+    providers: [ProfesoresService, AlumnosService, AsesoresService, ODSservice, KeywordsService],
 })
 export class ProfesoresModule {}

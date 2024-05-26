@@ -11,42 +11,27 @@ import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
 import { Profesor } from './profesores.model';
 import { AlumnosService } from 'src/alumnos/alumnos.service';
 import { AsesoresService } from 'src/asesores/asesores.service';
+import { KeywordsService } from 'src/keywords/keywords.service';
+import { ODSservice } from 'src/ods/ods.service';
 
 @Injectable({})
 export class ProfesoresService {
   constructor(
     @InjectModel(TrabajosInvestigacion)
     private trabajoModel: typeof TrabajosInvestigacion,
-    @InjectModel(Keyword)
-    private keywordModel: typeof Keyword,
-    @InjectModel(ODS)
-    private odsModel: typeof ODS,
     @InjectModel(Profesor)
     private profesorModel: typeof Profesor,
+    private keywordService: KeywordsService,
+    private odsService: ODSservice,
     private alumnoService: AlumnosService,
     private asesorService: AsesoresService
   ) {}
 
   async subirTrabajo(trabajo: CreateTrabajo) {
+    console.log(trabajo)
     try {
-      const keywords = await Promise.all(
-        trabajo.keywords.map(async (keywordName: string) => {
-          let keyword = await this.keywordModel.findOne({
-            where: { descripcion: keywordName },
-          });
-          if (!keyword) {
-            keyword = await this.keywordModel.create({ descripcion: keywordName });
-          }
-          return keyword;
-        }),
-      );
-
-      const ods = await this.odsModel.findAll({
-        where: {
-          id: trabajo.ods,
-        },
-      });
-
+      const keywords = await this.keywordService.findOrCreateKewords(trabajo.keywords);
+      const ods = await this.odsService.findODSbyId(trabajo.ods);
       const alumno = await this.alumnoService.findOrCreateAlumno(trabajo.alumno)
       const asesor = await this.asesorService.findOrCreateAsesor(trabajo.asesor)
       const profesor = await this.findProfesor(trabajo.profesor)
@@ -74,7 +59,7 @@ export class ProfesoresService {
     }
   }
 
-  private async findProfesor(profe: string): Promise<Profesor> {
+  async findProfesor(profe: string): Promise<Profesor> {
     let profesor = await this.profesorModel.findOne({
       where: { name: profe },
     });
