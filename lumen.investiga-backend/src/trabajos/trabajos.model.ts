@@ -1,8 +1,7 @@
-import { AllowNull, AutoIncrement, BelongsTo, BelongsToMany, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, BelongsToMany, Column, CreatedAt, DataType, ForeignKey, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
 import { Keyword } from 'src/keywords/keywords.model';
 import { TrabajoKeyword } from 'src/trabajos-keywords/trabajos-keywords.model';
 import { Profesor } from 'src/profesores/profesores.model';
-import { Area } from 'src/area/area.model';
 import { Subarea } from 'src/subarea/subarea.model';
 import { Periodo } from 'src/periodos/periodos.model';
 import { Asesor } from 'src/asesores/asesores.model';
@@ -22,7 +21,7 @@ export class TrabajosInvestigacion extends Model {
   @Column
   titulo: string;
 
-  @Column
+  @Column(DataType.TEXT)
   abstract: string;
   
   @Column

@@ -7,13 +7,13 @@ import { CreateAlumno } from "./dto/create-alumno.dto";
 export class AlumnosService {
   constructor(@InjectModel(Alumno) private alumnoModel: typeof Alumno) { }
   
-  async crearAlumno(alumno: CreateAlumno) {
-    try {
-      return await this.alumnoModel.create(alumno as any)
+  async findOrCreateAlumno(alumnoDto: CreateAlumno): Promise<Alumno> {
+    let alumno = await this.alumnoModel.findOne({
+      where: { name: alumnoDto.name },
+    });
+    if (!alumno) {
+      alumno = await this.alumnoModel.create(alumnoDto as any);
     }
-    catch(err) {
-      console.error(err)
-      return null;
-    }
+    return alumno;
   }
 }

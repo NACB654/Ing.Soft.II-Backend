@@ -7,23 +7,13 @@ import { CreateAsesorDto } from "./dto/create-asesor.dto";
 export class AsesoresService {
   constructor(@InjectModel(Asesor) private asesorModel: typeof Asesor) { }
   
-  async crearAsesor(asesor: CreateAsesorDto) {
-    try {
-      return await this.asesorModel.create(asesor as any);
+  async findOrCreateAsesor(asesorDto: CreateAsesorDto): Promise<Asesor> {
+    let asesor = await this.asesorModel.findOne({
+      where: { name: asesorDto.name },
+    });
+    if (!asesor) {
+      asesor = await this.asesorModel.create(asesorDto as any);
     }
-    catch (err) {
-      console.error(err)
-      return null;
-    }
-  }
-
-  async getAsesores() {
-    try {
-      return await this.asesorModel.findAll();
-    }
-    catch (err) {
-      console.error(err)
-      return null;
-    }
+    return asesor;
   }
 }

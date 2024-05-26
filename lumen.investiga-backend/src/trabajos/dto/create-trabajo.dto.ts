@@ -1,12 +1,16 @@
+import { CreateAlumno } from "src/alumnos/dto/create-alumno.dto";
+import { CreateAsesorDto } from "src/asesores/dto/create-asesor.dto";
+
 export class CreateTrabajo {
   titulo: string;
   abstract: string;
   archivo_url: string;
-  areaId: number;
   subareaId: number;
   periodoId: number;
-  asesorId: number;
-  profesorId: number;
-  alumnoId: number;
+  asesor: CreateAsesorDto;
+  keywords: string[];
+  profesor: string;
+  alumno: CreateAlumno;
+  ods: number[];
   cursoId: number;
 }

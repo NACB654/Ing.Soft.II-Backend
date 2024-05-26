@@ -42,6 +42,15 @@ export class UsuariosService {
     }
   }
 
+  async getUser(id: number) {
+    try {
+      return await this.userModel.findOne({where: {id}})
+    } catch (err) {
+      console.error(err)
+      return null;
+    }
+  }
+
   realizarBusqueda() {
     return { msg: 'Buscando...' };
   }

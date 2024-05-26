@@ -8,6 +8,6 @@ export class ProfesoresController {
     
     @Post('subir')
     subirTrabajo(@Body() trabajo: CreateTrabajo) {
-        this.profesorService.subirTrabajo(trabajo)
+        return this.profesorService.subirTrabajo(trabajo)
     }
 }
