@@ -1,4 +1,4 @@
-INSERT INTO "Areas" (descripcion, "createdAt", "updatedAt")
+INSERT INTO "ODs" (descripcion, "createdAt", "updatedAt")
 VALUES
 ('ODS 1 - Fin de la Pobreza', NOW(), NOW()),
 ('ODS 2 - Hambre Cero', NOW(), NOW()),
@@ -16,4 +16,4 @@ VALUES
 ('ODS 14 - Vida Submarina', NOW(), NOW()),
 ('ODS 15 - Vida de Ecosistemas Terrestres', NOW(), NOW()),
 ('ODS 16 - Paz, Justicia e Instituciones Solidas', NOW(), NOW()),
-('ODS 17 - Alianzas para Lograr los Objetivos', NOW(), NOW()),
+('ODS 17 - Alianzas para Lograr los Objetivos', NOW(), NOW());

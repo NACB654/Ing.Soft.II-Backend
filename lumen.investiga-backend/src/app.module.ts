@@ -13,6 +13,8 @@ import { OdsTrabajosModule } from './ods-trabajos/ods-trabajos.module';
 import { PeriodosModule } from './periodos/periodos.module';
 import { SubareaModule } from './subarea/subarea.module';
 import { TrabajosKeywordsModule } from './trabajos-keywords/trabajos-keywords.module';
+import { ComentarioModule } from './comentarios/comentario.module';
+import { ValoracionModule } from './valoraciones/valoracion.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { TrabajosKeywordsModule } from './trabajos-keywords/trabajos-keywords.mo
     PeriodosModule,
     SubareaModule,
     TrabajosKeywordsModule,
+    ComentarioModule,
+    ValoracionModule
   ],
 })
 export class AppModule {}

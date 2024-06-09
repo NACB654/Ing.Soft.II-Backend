@@ -1,4 +1,4 @@
-import { AllowNull, AutoIncrement, BelongsTo, BelongsToMany, Column, CreatedAt, DataType, ForeignKey, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsTo, BelongsToMany, Column, CreatedAt, DataType, ForeignKey, HasMany, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
 import { Keyword } from 'src/keywords/keywords.model';
 import { TrabajoKeyword } from 'src/trabajos-keywords/trabajos-keywords.model';
 import { Profesor } from 'src/profesores/profesores.model';
@@ -9,6 +9,8 @@ import { Curso } from 'src/cursos/cursos.model';
 import { ODS } from 'src/ods/ods.model';
 import { ODSTrabajo } from 'src/ods-trabajos/ods-trabajos.model';
 import { Alumno } from 'src/alumnos/alumnos.model';
+import { Comentario } from 'src/comentarios/cometarios.model';
+import { Valoracion } from 'src/valoraciones/valoracion.model';
 
 @Table
 export class TrabajosInvestigacion extends Model {
@@ -74,6 +76,12 @@ export class TrabajosInvestigacion extends Model {
 
   @BelongsTo(() => Curso)
   curso: Curso;
+
+  @HasMany(() => Comentario)
+  comentarios: Comentario[];
+
+  @HasMany(() => Valoracion)
+  valoraciones: Valoracion[];
 
   @CreatedAt
   creationDate: Date;
