@@ -1,4 +1,5 @@
-import { AllowNull, AutoIncrement, Column, CreatedAt, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { Comentario } from 'src/comentarios/cometarios.model';
 
 @Table
 export class Usuario extends Model {
@@ -29,6 +30,9 @@ export class Usuario extends Model {
 
   @Column
   isTeacher: boolean;
+
+  @HasMany(() => Comentario)
+  comentarios: Comentario[];
 
   @CreatedAt
   creationDate: Date;

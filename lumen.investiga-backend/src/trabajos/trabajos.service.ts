@@ -52,6 +52,9 @@ export class TrabajosInvestigacionService {
           },
           Alumno,
         ],
+        order: [
+          ['titulo', 'ASC']
+        ]
       });
     } catch (err) {
       console.error(err);
