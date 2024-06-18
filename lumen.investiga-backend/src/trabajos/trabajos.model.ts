@@ -29,6 +29,9 @@ export class TrabajosInvestigacion extends Model {
   @Column
   archivo_url: string;
 
+  @Column(DataType.FLOAT)
+  puntaje: number;
+
   @BelongsToMany(() => Keyword, () => TrabajoKeyword)
   keywords: Keyword[];
 

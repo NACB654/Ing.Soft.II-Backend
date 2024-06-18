@@ -1,4 +1,4 @@
-import { AllowNull, AutoIncrement, BelongsTo, Column, CreatedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, BelongsTo, Column, CreatedAt, DataType, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
 import { TrabajosInvestigacion } from "src/trabajos/trabajos.model";
 
 @Table
@@ -9,7 +9,7 @@ export class Valoracion extends Model {
   @Column
   id: number;
 
-  @Column
+  @Column(DataType.FLOAT)
   puntaje: number;
 
   @ForeignKey(() => TrabajosInvestigacion)

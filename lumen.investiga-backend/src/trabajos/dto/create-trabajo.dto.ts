@@ -5,6 +5,7 @@ export class CreateTrabajo {
   titulo: string;
   abstract: string;
   archivo_url: string;
+  puntaje: number;
   subareaId: number;
   periodoId: number;
   asesor: CreateAsesorDto;
