@@ -20,9 +20,4 @@ export class TrabajosInvestigacionController {
     mostrarDetalle(@Param("id") id: number) {
         return this.trabajosInvestigacionService.mostrarDetalle(id)
     }
-
-    @Get('abrir')
-    abrirTrabajo() {
-        return this.trabajosInvestigacionService.abrirTrabajo()
-    }
 }

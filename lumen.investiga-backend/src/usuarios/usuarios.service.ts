@@ -50,8 +50,4 @@ export class UsuariosService {
       return null;
     }
   }
-
-  realizarBusqueda() {
-    return { msg: 'Buscando...' };
-  }
 }

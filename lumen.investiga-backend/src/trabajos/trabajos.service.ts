@@ -84,8 +84,4 @@ export class TrabajosInvestigacionService {
       return null;
     }
   }
-
-  abrirTrabajo() {
-    return { msg: 'Abriendo trabajo' };
-  }
 }

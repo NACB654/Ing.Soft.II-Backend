@@ -21,9 +21,4 @@ export class UsuariosController {
     getUser(@Param("id") id: number) {
         return this.usuariosService.getUser(id);
     }
-
-    @Get('busqueda')
-    realizarBusqueda() {
-        return this.usuariosService.realizarBusqueda()
-    }
 }
