@@ -22,7 +22,7 @@ export class Comentario extends Model {
 
   @ForeignKey(() => Usuario)
   @Column
-  usuarioid: number;
+  usuarioId: number;
   
   @BelongsTo(() => Usuario)
   usuario: Usuario

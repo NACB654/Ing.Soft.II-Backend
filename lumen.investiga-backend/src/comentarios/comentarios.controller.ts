@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { ComentarioService } from "./comentarios.service";
 import { createComentario } from "./dto/createcomentario.dto";
 
@@ -6,9 +6,9 @@ import { createComentario } from "./dto/createcomentario.dto";
 export class ComentarioController {
   constructor(private comentarioService: ComentarioService) { }
   
-  @Get('info')
-  getComentarios() {
-    // agregar logica
+  @Get('info/:id')
+  getComentarios(@Param("id") trabajoId: number) {
+    return this.comentarioService.getComentarios(trabajoId);
   }
 
   @Post("crear")

@@ -9,13 +9,19 @@ export class ComentarioService {
   constructor(@InjectModel(Comentario) private comentarioModel: typeof Comentario) { }
   
   async getComentarios(trabajoId: number) {
-    return await this.comentarioModel.findAll({
-      where: { trabajoId },
-      include: { model: Usuario, attributes: ['name', 'last_name'] }
-    });
+    try {
+      return await this.comentarioModel.findAll({
+        where: { trabajoId },
+        include: { model: Usuario, attributes: ['name', 'last_name'] }
+      });
+    } catch (err) {
+      console.error(err)
+      return null
+    }
   }
 
-  async crearComentario (comentariodto: createComentario) {
+  async crearComentario(comentariodto: createComentario) {
+    console.log(comentariodto)
     try {
       return await this.comentarioModel.create(comentariodto as any)
     } catch (error) {

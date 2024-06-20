@@ -1,5 +1,5 @@
 export class createComentario {
     descripcion: string;
-    usuarioid: number;
+    usuarioId: number;
     trabajoId: number;
 }
