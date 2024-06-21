@@ -12,6 +12,7 @@ import { Curso } from 'src/cursos/cursos.model';
 import { Periodo } from 'src/periodos/periodos.model';
 import { Subarea } from 'src/subarea/subarea.model';
 import { Area } from 'src/area/area.model';
+import { filtrosDto } from './dto/filtros.dto';
 
 @Injectable({})
 export class TrabajosInvestigacionService {
@@ -51,10 +52,12 @@ export class TrabajosInvestigacionService {
             through: { attributes: [] },
           },
           Alumno,
+          ODS,
+          Curso,
+          Periodo,
+          { model: Subarea, include: [{ model: Area }] },
         ],
-        order: [
-          ['titulo', 'ASC']
-        ]
+        order: [['titulo', 'ASC']],
       });
     } catch (err) {
       console.error(err);
@@ -78,6 +81,51 @@ export class TrabajosInvestigacionService {
           { model: Subarea, include: [{ model: Area }] },
           { model: Keyword },
         ],
+      });
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
+  async filtrarResultados(filtros: filtrosDto) {
+    try {
+      return await this.trabajoModel.findAll({
+        include: [
+          {
+            model: Keyword,
+            where: {
+              descripcion: {
+                [Op.iLike]: `%${filtros.keyword}%`,
+              },
+            },
+            through: { attributes: [] },
+          },
+          Alumno,
+          {
+            model: ODS,
+            where: filtros.ods ? { id: filtros.ods } : undefined,
+          },
+          {
+            model: Curso,
+            where: filtros.cursoId ? { id: filtros.cursoId } : undefined,
+          },
+          {
+            model: Periodo,
+            where: filtros.periodoId ? { id: filtros.periodoId } : undefined,
+          },
+          {
+            model: Subarea,
+            where: filtros.subareaId ? { id: filtros.subareaId } : undefined,
+            include: [
+              {
+                model: Area,
+                where: filtros.areaId ? { id: filtros.areaId } : undefined,
+              },
+            ],
+          },
+        ],
+        order: [['titulo', 'ASC']],
       });
     } catch (err) {
       console.error(err);

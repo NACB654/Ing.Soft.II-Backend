@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { TrabajosInvestigacionService } from "./trabajos.service";
+import { filtrosDto } from "./dto/filtros.dto";
 
 @Controller('trabajo')
 export class TrabajosInvestigacionController {
@@ -19,5 +20,10 @@ export class TrabajosInvestigacionController {
     @Get('detalle/:id')
     mostrarDetalle(@Param("id") id: number) {
         return this.trabajosInvestigacionService.mostrarDetalle(id)
+    }
+
+    @Post("filtrar")
+    filtrarResultados(@Body() filtros: filtrosDto) {
+        return this.trabajosInvestigacionService.filtrarResultados(filtros)
     }
 }
