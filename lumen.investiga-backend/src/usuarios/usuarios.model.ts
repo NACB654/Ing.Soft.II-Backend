@@ -1,5 +1,7 @@
-import { AllowNull, AutoIncrement, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsToMany, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, Unique, UpdatedAt } from 'sequelize-typescript';
 import { Comentario } from 'src/comentarios/cometarios.model';
+import { TrabajoUsuario } from 'src/trabajos-usuarios/trabajos-usuarios.model';
+import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
 
 @Table
 export class Usuario extends Model {
@@ -33,6 +35,9 @@ export class Usuario extends Model {
 
   @HasMany(() => Comentario)
   comentarios: Comentario[];
+
+  @BelongsToMany(() => TrabajosInvestigacion, () => TrabajoUsuario)
+  trabajos: TrabajosInvestigacion[];
 
   @CreatedAt
   creationDate: Date;

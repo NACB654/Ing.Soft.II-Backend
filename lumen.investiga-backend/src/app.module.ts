@@ -15,6 +15,7 @@ import { SubareaModule } from './subarea/subarea.module';
 import { TrabajosKeywordsModule } from './trabajos-keywords/trabajos-keywords.module';
 import { ComentarioModule } from './comentarios/comentario.module';
 import { ValoracionModule } from './valoraciones/valoracion.module';
+import { TrabajoUsuarioModule } from './trabajos-usuarios/trabajos-usuarios.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { ValoracionModule } from './valoraciones/valoracion.module';
     SubareaModule,
     TrabajosKeywordsModule,
     ComentarioModule,
-    ValoracionModule
+    ValoracionModule,
+    TrabajoUsuarioModule
   ],
 })
 export class AppModule {}

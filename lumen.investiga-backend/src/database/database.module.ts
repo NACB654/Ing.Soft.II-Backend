@@ -13,6 +13,7 @@ import { PeriodosModule } from 'src/periodos/periodos.module';
 import { ProfesoresModule } from 'src/profesores/profesores.module';
 import { SubareaModule } from 'src/subarea/subarea.module';
 import { TrabajoKeyword } from 'src/trabajos-keywords/trabajos-keywords.model';
+import { TrabajoUsuarioModule } from 'src/trabajos-usuarios/trabajos-usuarios.module';
 import { TrabajosInvestigacionModule } from 'src/trabajos/trabajos.module';
 import { UsuariosModule } from 'src/usuarios/usuarios.module';
 import { ValoracionModule } from 'src/valoraciones/valoracion.module';
@@ -51,7 +52,8 @@ import { ValoracionModule } from 'src/valoraciones/valoracion.module';
     OdsTrabajosModule,
     PeriodosModule,
     ComentarioModule,
-    ValoracionModule
+    ValoracionModule,
+    TrabajoUsuarioModule
   ],
 })
 export class DatabaseModule {}

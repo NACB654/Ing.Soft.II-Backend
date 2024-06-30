@@ -11,6 +11,8 @@ import { ODSTrabajo } from 'src/ods-trabajos/ods-trabajos.model';
 import { Alumno } from 'src/alumnos/alumnos.model';
 import { Comentario } from 'src/comentarios/cometarios.model';
 import { Valoracion } from 'src/valoraciones/valoracion.model';
+import { Usuario } from 'src/usuarios/usuarios.model';
+import { TrabajoUsuario } from 'src/trabajos-usuarios/trabajos-usuarios.model';
 
 @Table
 export class TrabajosInvestigacion extends Model {
@@ -37,6 +39,9 @@ export class TrabajosInvestigacion extends Model {
 
   @BelongsToMany(() => ODS, () => ODSTrabajo)
   ods: ODS[];
+
+  @BelongsToMany(() => Usuario, () => TrabajoUsuario)
+  usuarios: Usuario[];
 
   @ForeignKey(() => Subarea)
   @Column
