@@ -26,4 +26,9 @@ export class TrabajosInvestigacionController {
     filtrarResultados(@Body() filtros: filtrosDto) {
         return this.trabajosInvestigacionService.filtrarResultados(filtros)
     }
+
+    @Get('guardados/:id')
+    getTrabajosGuardados(@Param("id") id: number) {
+        return this.trabajosInvestigacionService.getTrabajosGuardados(id);
+    }
 }

@@ -4,12 +4,15 @@ import { Usuario } from "./usuarios.model";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginDto } from "./dto/login.dto";
 import { Profesor } from "src/profesores/profesores.model";
+import { GuardarTrabajoDto } from "./dto/guardarTrabajo.dt";
+import { TrabajoUsuario } from "src/trabajos-usuarios/trabajos-usuarios.model";
 
 @Injectable()
 export class UsuariosService {
   constructor(
     @InjectModel(Usuario) private userModel: typeof Usuario,
     @InjectModel(Profesor) private profesorModel: typeof Profesor,
+    @InjectModel(TrabajoUsuario) private trabajoUsuarioModel: typeof TrabajoUsuario,
   ) {}
 
   async registrarCuenta(user: CreateUserDto) {
@@ -48,6 +51,18 @@ export class UsuariosService {
     } catch (err) {
       console.error(err)
       return null;
+    }
+  }
+
+  async guardarTrabajo(trabajo: GuardarTrabajoDto) {
+    try {
+      return await this.trabajoUsuarioModel.create({
+        usuarioId: trabajo.userId,
+        trabajoId: trabajo.trabajoId,
+      })
+    } catch (err) {
+      console.error(err)
+      return null
     }
   }
 }

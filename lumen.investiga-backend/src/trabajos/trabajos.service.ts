@@ -13,6 +13,7 @@ import { Periodo } from 'src/periodos/periodos.model';
 import { Subarea } from 'src/subarea/subarea.model';
 import { Area } from 'src/area/area.model';
 import { filtrosDto } from './dto/filtros.dto';
+import { Usuario } from 'src/usuarios/usuarios.model';
 
 @Injectable({})
 export class TrabajosInvestigacionService {
@@ -31,6 +32,26 @@ export class TrabajosInvestigacionService {
           profesorId: profesor.id,
         },
         include: Alumno,
+      });
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+  }
+
+  async getTrabajosGuardados(id: number) {
+    try {
+      return await this.trabajoModel.findAll({
+        include: [
+          {
+            model: Usuario,
+            where: {
+              id
+            },
+            through: { attributes: [] },
+          },
+          Alumno,
+        ]
       });
     } catch (err) {
       console.error(err);
@@ -80,6 +101,7 @@ export class TrabajosInvestigacionService {
           { model: Periodo },
           { model: Subarea, include: [{ model: Area }] },
           { model: Keyword },
+          { model: Usuario, through: {attributes: []} }
         ],
       });
     } catch (err) {

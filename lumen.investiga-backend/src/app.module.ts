@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import configuration from './config/configurations';
+import { GoogleDriveService } from './google-drive/google-drive.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ProfesoresModule } from './profesores/profesores.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
@@ -35,7 +38,11 @@ import { TrabajoUsuarioModule } from './trabajos-usuarios/trabajos-usuarios.modu
     TrabajosKeywordsModule,
     ComentarioModule,
     ValoracionModule,
-    TrabajoUsuarioModule
+    TrabajoUsuarioModule,
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
   ],
+  providers: [GoogleDriveService]
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { UsuariosService } from "./usuarios.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginDto } from "./dto/login.dto";
+import { GuardarTrabajoDto } from "./dto/guardarTrabajo.dt";
 
 @Controller('usuario')
 export class UsuariosController {
@@ -20,5 +21,10 @@ export class UsuariosController {
     @Get('data/:id')
     getUser(@Param("id") id: number) {
         return this.usuariosService.getUser(id);
+    }
+
+    @Post('guardar')
+    guardarTrabajos(@Body() trabajo: GuardarTrabajoDto) {
+        return this.usuariosService.guardarTrabajo(trabajo);
     }
 }
