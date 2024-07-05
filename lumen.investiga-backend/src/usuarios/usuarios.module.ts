@@ -6,10 +6,21 @@ import { Usuario } from './usuarios.model';
 import { Profesor } from 'src/profesores/profesores.model';
 import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
 import { TrabajoUsuario } from 'src/trabajos-usuarios/trabajos-usuarios.model';
+import { GoogleDriveService } from 'src/google-drive/google-drive.service';
+import { ConfigService } from '@nestjs/config';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
-    imports: [SequelizeModule.forFeature([Usuario, Profesor, TrabajosInvestigacion, TrabajoUsuario])],
-    controllers: [UsuariosController],
-    providers: [UsuariosService],
+  imports: [
+    SequelizeModule.forFeature([
+      Usuario,
+      Profesor,
+      TrabajosInvestigacion,
+      TrabajoUsuario,
+    ]),
+    MulterModule.register({ dest: './uploads' }),
+  ],
+  controllers: [UsuariosController],
+  providers: [UsuariosService, GoogleDriveService, ConfigService],
 })
 export class UsuariosModule {}
