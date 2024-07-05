@@ -82,4 +82,24 @@ export class UsuariosService {
       return null
     }
   }
+
+  async subirFoto(url: string, id: number) {
+    const datos = {
+      foto_url: url
+    }
+
+    try {
+      const result = await this.userModel.findOne({where: { id }})
+
+      if (result) {
+        result.set(datos)
+        result.save()
+      }
+
+      return result
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
 }

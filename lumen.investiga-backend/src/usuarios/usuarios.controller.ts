@@ -40,7 +40,7 @@ export class UsuariosController {
 
     @Post('foto')
     @UseInterceptors(FileInterceptor('file'))
-    async subirFoto(@UploadedFile() file: Express.Multer.File) {
+    async subirFoto(@UploadedFile() file: Express.Multer.File, @Body("id") id: number) {
         if (!file) {
             console.log("No hay archivo subido")
         }
@@ -52,6 +52,6 @@ export class UsuariosController {
             fs.unlinkSync(file.path)
         }
 
-        return { url } ;
+        return this.usuariosService.subirFoto(url, id);
     }
 }
