@@ -6,6 +6,7 @@ import { LoginDto } from "./dto/login.dto";
 import { Profesor } from "src/profesores/profesores.model";
 import { GuardarTrabajoDto } from "./dto/guardarTrabajo.dt";
 import { TrabajoUsuario } from "src/trabajos-usuarios/trabajos-usuarios.model";
+import { ModifyUserDto } from "./dto/modify-user.dto";
 
 @Injectable()
 export class UsuariosService {
@@ -60,6 +61,42 @@ export class UsuariosService {
         usuarioId: trabajo.userId,
         trabajoId: trabajo.trabajoId,
       })
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
+
+  async modificarDatos(datos: ModifyUserDto){
+    try {
+      const result = await this.userModel.findOne({where: {id: datos.id}})
+
+      if (result) {
+        result.set(datos)
+        result.save()
+      }
+
+      return result
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
+
+  async subirFoto(url: string, id: number) {
+    const datos = {
+      foto_url: url
+    }
+
+    try {
+      const result = await this.userModel.findOne({where: { id }})
+
+      if (result) {
+        result.set(datos)
+        result.save()
+      }
+
+      return result
     } catch (err) {
       console.error(err)
       return null

@@ -43,6 +43,6 @@ import { TrabajoUsuarioModule } from './trabajos-usuarios/trabajos-usuarios.modu
       load: [configuration],
     }),
   ],
-  providers: [GoogleDriveService]
+  providers: [GoogleDriveService, ConfigService]
 })
 export class AppModule {}

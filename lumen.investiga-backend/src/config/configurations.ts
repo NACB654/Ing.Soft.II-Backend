@@ -1,15 +1,11 @@
-import * as fs from 'fs';
-import * as path from 'path';
-
 export default () => {
-  const oauthCredentials = JSON.parse(
-    fs.readFileSync(path.join(__dirname, '../../credentials.json'), 'utf-8')
-  );
 
   return {
     oauth: {
-      clientId: oauthCredentials.web.client_id,
-      clientSecret: oauthCredentials.web.client_secret,
+      clientId: "835617247657-fc37sgt8pj5d9hqurecf8kcov03ha2su.apps.googleusercontent.com",
+      clientSecret: "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",
+      redirectUri: "http://localhost:3000/oauth2callback",
+      refreshToken: '1//051J51dMMHeSrCgYIARAAGAUSNwF-L9Ir4s_oCfSXDURcP8-v1T5tp6mWPzZXdebSbpJv_A4ktgP9tfRjd_q5XnKS1ZX4JnQOdEE',
     },
   };
 };
