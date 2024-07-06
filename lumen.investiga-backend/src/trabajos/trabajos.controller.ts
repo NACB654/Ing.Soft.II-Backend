@@ -13,7 +13,7 @@ export class TrabajosInvestigacionController {
 
     @Get('mostrar')
     mostrarResultados(@Query("keyword") keyword: string) {
-        console.log(keyword)
+        // console.log(keyword)
         return this.trabajosInvestigacionService.mostrarResultados(keyword)
     }
 
@@ -30,5 +30,10 @@ export class TrabajosInvestigacionController {
     @Get('guardados/:id')
     getTrabajosGuardados(@Param("id") id: number) {
         return this.trabajosInvestigacionService.getTrabajosGuardados(id);
+    }
+
+    @Get('totales')
+    visualizarTotales() {
+        return this.trabajosInvestigacionService.visualizarTotales();
     }
 }

@@ -13,10 +13,17 @@ import { Keyword } from 'src/keywords/keywords.model';
 import { ODS } from 'src/ods/ods.model';
 import { Alumno } from 'src/alumnos/alumnos.model';
 import { Asesor } from 'src/asesores/asesores.model';
+import { PeeriodosService } from 'src/periodos/periodos.service';
+import { Periodo } from 'src/periodos/periodos.model';
+import { Area } from 'src/area/area.model';
+import { Subarea } from 'src/subarea/subarea.model';
+import { SubareaService } from 'src/subarea/subarea.service';
+import { Curso } from 'src/cursos/cursos.model';
+import { CursosService } from 'src/cursos/cursos.services';
 
 @Module({
-  imports: [SequelizeModule.forFeature([TrabajosInvestigacion, Profesor, Keyword, ODS, Alumno, Asesor])],
+  imports: [SequelizeModule.forFeature([TrabajosInvestigacion, Profesor, Keyword, ODS, Alumno, Asesor, Periodo, Area, Subarea, Curso])],
   controllers: [TrabajosInvestigacionController],
-  providers: [TrabajosInvestigacionService, ProfesoresService, KeywordsService, ODSservice, AlumnosService, AsesoresService],
+  providers: [TrabajosInvestigacionService, ProfesoresService, KeywordsService, ODSservice, AlumnosService, AsesoresService, PeeriodosService, SubareaService, CursosService],
 })
 export class TrabajosInvestigacionModule {}

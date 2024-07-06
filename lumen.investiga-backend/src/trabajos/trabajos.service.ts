@@ -14,6 +14,12 @@ import { Subarea } from 'src/subarea/subarea.model';
 import { Area } from 'src/area/area.model';
 import { filtrosDto } from './dto/filtros.dto';
 import { Usuario } from 'src/usuarios/usuarios.model';
+import { AsesoresService } from 'src/asesores/asesores.service';
+import { ODSservice } from 'src/ods/ods.service';
+import { PeeriodosService } from 'src/periodos/periodos.service';
+import { SubareaService } from 'src/subarea/subarea.service';
+import { Sequelize } from 'sequelize-typescript';
+import { CursosService } from 'src/cursos/cursos.services';
 
 @Injectable({})
 export class TrabajosInvestigacionService {
@@ -21,6 +27,11 @@ export class TrabajosInvestigacionService {
     @InjectModel(TrabajosInvestigacion)
     private trabajoModel: typeof TrabajosInvestigacion,
     private profesorSevice: ProfesoresService,
+    private asesorService: AsesoresService,
+    private odsService: ODSservice,
+    private periodosService: PeeriodosService,
+    private subareaService: SubareaService,
+    private cursoService: CursosService
   ) {}
 
   async getTrabajos(profe: string) {
@@ -151,6 +162,22 @@ export class TrabajosInvestigacionService {
       });
     } catch (err) {
       console.error(err);
+      return null;
+    }
+  }
+
+  async visualizarTotales() {
+    try {
+      const asesores = await this.asesorService.totalTrabajosAsesor();
+      const ods = await this.odsService.totalTrabajosODS();
+      const periodos = await this.periodosService.totalTrabajosPeriodos();
+      const areasYSubareas = await this.subareaService.totalTrabajosAreasSubareas();
+      const cursos = await this.cursoService.totalTrabajosCurso();
+
+      return { asesores, ods, periodos, areasYSubareas, cursos };
+      
+    } catch (err) {
+      console.error(err)
       return null;
     }
   }

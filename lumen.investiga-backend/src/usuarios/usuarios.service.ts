@@ -7,6 +7,7 @@ import { Profesor } from "src/profesores/profesores.model";
 import { GuardarTrabajoDto } from "./dto/guardarTrabajo.dt";
 import { TrabajoUsuario } from "src/trabajos-usuarios/trabajos-usuarios.model";
 import { ModifyUserDto } from "./dto/modify-user.dto";
+import { ChangePasswordDto } from "./dto/change-password.dto";
 
 @Injectable()
 export class UsuariosService {
@@ -83,6 +84,22 @@ export class UsuariosService {
     }
   }
 
+  async cambiarPassword(datos: ChangePasswordDto) {
+    try {
+      const result = await this.userModel.findOne({where: {id: datos.id}})
+
+      if (result) {
+        result.set(datos)
+        result.save()
+      }
+
+      return result
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
+
   async subirFoto(url: string, id: number) {
     const datos = {
       foto_url: url
@@ -103,15 +120,18 @@ export class UsuariosService {
     }
   }
 
-  async eliminarTrabajo(userId: number, trabajoId: number) {
+  async eliminarTrabajo(usuarioId: number, trabajoId: number) {
     try {
       const trabajoUsuario = await this.trabajoUsuarioModel.findOne({
-        where: { userId, trabajoId }
+        where: { usuarioId, trabajoId }
       });
   
       if (trabajoUsuario) {
         await trabajoUsuario.destroy();
       }
+
+      return trabajoUsuario;
+
     } catch (err) {
       console.error(err);
     }

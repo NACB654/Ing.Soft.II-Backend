@@ -1,6 +1,7 @@
-import { AllowNull, AutoIncrement, BelongsToMany, Column, CreatedAt, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, BelongsToMany, Column, CreatedAt, HasMany, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 import { CursoProfesor } from 'src/cursos-profesores/cursos-profesores.model';
 import { Profesor } from 'src/profesores/profesores.model';
+import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
 
 @Table
 export class Curso extends Model {
@@ -15,6 +16,9 @@ export class Curso extends Model {
 
   @BelongsToMany(() => Profesor, () => CursoProfesor)
   profesor: Profesor[]
+
+  @HasMany(() => TrabajosInvestigacion)
+  trabajos: TrabajosInvestigacion[]
 
   @CreatedAt
   creationDate: Date;

@@ -8,6 +8,7 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { GoogleDriveService } from "src/google-drive/google-drive.service";
 import * as fs from 'fs';
 import * as path from "path";
+import { ChangePasswordDto } from "./dto/change-password.dto";
 
     @Controller('usuario')
     export class UsuariosController {
@@ -36,6 +37,11 @@ import * as path from "path";
         @Put('modificar')
         modificarDatos(@Body() user: ModifyUserDto) {
             return this.usuariosService.modificarDatos(user)
+        }
+
+        @Put('password')
+        cambiarPassword(@Body() datos: ChangePasswordDto) {
+            return this.usuariosService.cambiarPassword(datos);
         }
 
         @Post('foto')
