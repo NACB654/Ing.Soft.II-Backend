@@ -27,6 +27,7 @@
     "@nestjs/sequelize": "^10.0.1",
     "cors": "^2.8.5",
     "googleapis": "^140.0.1",
+    "nest": "^0.1.6",
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.0",

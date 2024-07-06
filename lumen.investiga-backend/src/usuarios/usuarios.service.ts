@@ -65,4 +65,19 @@ export class UsuariosService {
       return null
     }
   }
+
+  async eliminarTrabajo(userId: number, trabajoId: number) {
+    try {
+      const trabajoUsuario = await this.trabajoUsuarioModel.findOne({
+        where: { userId, trabajoId }
+      });
+  
+      if (trabajoUsuario) {
+        await trabajoUsuario.destroy();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
 }
