@@ -52,34 +52,36 @@ describe('TrabajosInvestigacionService', () => {
     expect(service).toBeDefined();
   });
 
-  it('debe retornar resultados que coincidan con la palabra clave', async () => {
-    const keyword = 'sostenibilidad';
-    const resultadosEsperados = [
-      { id: 1, titulo: 'Proyecto sobre sostenibilidad' },
-      { id: 2, titulo: 'Impacto ambiental y sostenibilidad' }
-    ];
-
-    mockTrabajoModel.findAll.mockResolvedValue(resultadosEsperados);
-
-    const result = await service.mostrarResultados(keyword);
-    expect(result).toEqual(resultadosEsperados);
-  });
-
-  it('debe retornar un array vacío si no hay coincidencias', async () => {
-    const keyword = 'inexistente';
-    mockTrabajoModel.findAll.mockResolvedValue([]);
-
-    const result = await service.mostrarResultados(keyword);
-    expect(result).toEqual([]);
-  });
-
-  it('debe manejar errores al buscar los resultados', async () => {
-    const keyword = 'error';
-    const error = new Error('Error al acceder a la base de datos');
+  describe('Mostrar resultados', () => {
+    it('debe retornar resultados que coincidan con la palabra clave', async () => {
+      const keyword = 'sostenibilidad';
+      const resultadosEsperados = [
+        { id: 1, titulo: 'Proyecto sobre sostenibilidad' },
+        { id: 2, titulo: 'Impacto ambiental y sostenibilidad' }
+      ];
   
-    mockTrabajoModel.findAll.mockRejectedValue(error);
+      mockTrabajoModel.findAll.mockResolvedValue(resultadosEsperados);
   
-    const result = await service.mostrarResultados(keyword);
-    expect(result).toBeNull();
-  });
+      const result = await service.mostrarResultados(keyword);
+      expect(result).toEqual(resultadosEsperados);
+    });
+  
+    it('debe retornar un array vacío si no hay coincidencias', async () => {
+      const keyword = 'inexistente';
+      mockTrabajoModel.findAll.mockResolvedValue([]);
+  
+      const result = await service.mostrarResultados(keyword);
+      expect(result).toEqual([]);
+    });
+  
+    it('debe manejar errores al buscar los resultados', async () => {
+      const keyword = 'error';
+      const error = new Error('Error al acceder a la base de datos');
+    
+      mockTrabajoModel.findAll.mockRejectedValue(error);
+    
+      const result = await service.mostrarResultados(keyword);
+      expect(result).toBeNull();
+    });
+  })
 });

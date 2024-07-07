@@ -39,28 +39,30 @@ describe('ProfesoresService', () => {
     expect(service).toBeDefined();
   });
 
-  it('debe retornar un profesor si el nombre coincide', async () => {
-    const profeName = 'Juan Perez';
-    const expectedProfesor = { id: 1, name: 'Juan Perez' };
-    mockProfesorRepository.findOne.mockResolvedValue(expectedProfesor);
-
-    const result = await service.findProfesor(profeName);
-    expect(result).toEqual(expectedProfesor);
-  });
-
-  it('debe retornar null si no se encuentra el profesor', async () => {
-    const profeName = 'Nombre Inexistente';
-    mockProfesorRepository.findOne.mockResolvedValue(null);
-
-    const result = await service.findProfesor(profeName);
-    expect(result).toBeNull();
-  });
-
-  it('debe manejar errores al buscar un profesor', async () => {
-    const profeName = 'ErrorPrueba';
-    const error = new Error('Error de base de datos');
-    mockProfesorRepository.findOne.mockRejectedValue(error);
-
-    await expect(service.findProfesor(profeName)).rejects.toThrow(error);
-  });
+  describe('Buscar profesor', () => {
+    it('debe retornar un profesor si el nombre coincide', async () => {
+      const profeName = 'Juan Perez';
+      const expectedProfesor = { id: 1, name: 'Juan Perez' };
+      mockProfesorRepository.findOne.mockResolvedValue(expectedProfesor);
+  
+      const result = await service.findProfesor(profeName);
+      expect(result).toEqual(expectedProfesor);
+    });
+  
+    it('debe retornar null si no se encuentra el profesor', async () => {
+      const profeName = 'Nombre Inexistente';
+      mockProfesorRepository.findOne.mockResolvedValue(null);
+  
+      const result = await service.findProfesor(profeName);
+      expect(result).toBeNull();
+    });
+  
+    it('debe manejar errores al buscar un profesor', async () => {
+      const profeName = 'ErrorPrueba';
+      const error = new Error('Error de base de datos');
+      mockProfesorRepository.findOne.mockRejectedValue(error);
+  
+      await expect(service.findProfesor(profeName)).rejects.toThrow(error);
+    });
+  })
 });

@@ -34,12 +34,12 @@ describe('ComentarioService', () => {
     comentarioModel = module.get<typeof Comentario>(getModelToken(Comentario));
   });
 
-  it('should be defined', () => {
+  it('debe estar definido', () => {
     expect(service).toBeDefined();
   });
 
   describe('crearComentario', () => {
-    it('should create a comentario', async () => {
+    it('debe crear un comentario', async () => {
       const dto: createComentario = {
         descripcion: 'Test comentario',
         trabajoId: 1,
@@ -52,7 +52,7 @@ describe('ComentarioService', () => {
       expect(comentarioModel.create).toHaveBeenCalledWith(dto);
     });
 
-    it('should return null if an error occurs', async () => {
+    it('debe retornar null si ocurre un error', async () => {
       const dto: createComentario = {
         descripcion: 'Test comentario',
         trabajoId: 1,
