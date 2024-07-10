@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Alumno } from 'src/alumnos/alumnos.model';
-import { CreateAlumno } from 'src/alumnos/dto/create-alumno.dto';
-import { Asesor } from 'src/asesores/asesores.model';
-import { CreateAsesorDto } from 'src/asesores/dto/create-asesor.dto';
-import { Keyword } from 'src/keywords/keywords.model';
-import { ODS } from 'src/ods/ods.model';
 import { CreateTrabajo } from 'src/trabajos/dto/create-trabajo.dto';
 import { TrabajosInvestigacion } from 'src/trabajos/trabajos.model';
 import { Profesor } from './profesores.model';
@@ -28,7 +22,6 @@ export class ProfesoresService {
   ) {}
 
   async subirTrabajo(trabajo: CreateTrabajo) {
-    console.log(trabajo)
     try {
       const keywords = await this.keywordService.findOrCreateKewords(trabajo.keywords);
       const ods = await this.odsService.findODSbyId(trabajo.ods);
@@ -45,7 +38,8 @@ export class ProfesoresService {
         subareaId: trabajo.subareaId,
         cursoId: trabajo.cursoId,
         periodoId: trabajo.periodoId,
-        profesorId: profesor.id
+        profesorId: profesor.id,
+        puntaje: trabajo.puntaje
       });
 
       await result.$set('keywords', keywords)
