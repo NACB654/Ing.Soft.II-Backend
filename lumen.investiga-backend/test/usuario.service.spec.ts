@@ -5,6 +5,7 @@ import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { Usuario } from 'src/usuarios/usuarios.model';
 import { LoginDto } from 'src/usuarios/dto/login.dto';
 import { ModifyUserDto } from 'src/usuarios/dto/modify-user.dto';
+import { ChangePasswordDto } from 'src/usuarios/dto/change-password.dto';
 
 const mockRepository = {
   findOne: jest.fn(),
@@ -223,6 +224,48 @@ describe('Usuario service', () => {
       const result = await service.modificarDatos(modifyUserDto);
 
       expect(result).toEqual(user);
+    });
+  });
+
+  describe("Cambiar contraseña", () => {
+    it('debe cambiar la contraseña exitosamente', async () => {
+      const datos: ChangePasswordDto = { id: 1, password: 'newPassword' };
+
+      const mockUser = {
+        id: 1,
+        set: jest.fn(),
+        save: jest.fn(),
+      };
+
+      jest.spyOn(usuarioModel, 'findOne').mockResolvedValue(mockUser as any);
+
+      const result = await service.cambiarPassword(datos);
+
+      expect(usuarioModel.findOne).toHaveBeenCalledWith({ where: { id: datos.id } });
+      expect(mockUser.set).toHaveBeenCalledWith(datos);
+      expect(mockUser.save).toHaveBeenCalled();
+      expect(result).toBe(mockUser);
+    });
+
+    it('debe retornar null si el usuario no existe', async () => {
+      const datos: ChangePasswordDto = { id: 1, password: 'newPassword' };
+
+      jest.spyOn(usuarioModel, 'findOne').mockResolvedValue(null);
+
+      const result = await service.cambiarPassword(datos);
+
+      expect(usuarioModel.findOne).toHaveBeenCalledWith({ where: { id: datos.id } });
+      expect(result).toBeNull();
+    });
+
+    it('sdebe manejar errores y retornar null', async () => {
+      const datos: ChangePasswordDto = { id: 1, password: 'newPassword' };
+
+      jest.spyOn(usuarioModel, 'findOne').mockRejectedValue(new Error('test error'));
+
+      const result = await service.cambiarPassword(datos);
+
+      expect(result).toBeNull();
     });
   });
 });
