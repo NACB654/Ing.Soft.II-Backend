@@ -34,7 +34,7 @@ export class GoogleDriveService {
       });
 
       const fileId = response.data.id;
-      const sharedLink = `https://drive.google.com/uc?id=${fileId}`;
+      const sharedLink = mimeType != "application/pdf" ? `https://drive.google.com/uc?id=${fileId}` : `https://drive.google.com/file/d/${fileId}/view?usp=drive_link`;
 
       await drive.permissions.create({
         fileId: fileId!,

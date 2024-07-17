@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configurations';
 import { GoogleDriveService } from './google-drive/google-drive.service';
@@ -19,6 +19,8 @@ import { TrabajosKeywordsModule } from './trabajos-keywords/trabajos-keywords.mo
 import { ComentarioModule } from './comentarios/comentario.module';
 import { ValoracionModule } from './valoraciones/valoracion.module';
 import { TrabajoUsuarioModule } from './trabajos-usuarios/trabajos-usuarios.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { LogMiddleware } from './log.middleware';
 
 @Module({
   imports: [
@@ -42,7 +44,16 @@ import { TrabajoUsuarioModule } from './trabajos-usuarios/trabajos-usuarios.modu
     ConfigModule.forRoot({
       load: [configuration],
     }),
+    MulterModule.register({
+      dest: './uploads'
+    }),
   ],
   providers: [GoogleDriveService, ConfigService]
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LogMiddleware)
+      .forRoutes('*');
+  }
+}

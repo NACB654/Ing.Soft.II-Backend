@@ -7,7 +7,7 @@ async function getTokens() {
     'http://localhost:3000/oauth2callback'
   );
 
-  const { tokens } = await oauth2Client.getToken('4/0ATx3LY4DL8lXUqfpvc-pAmmHbrcmvEAV3EzoXvZTENVEYlN_HBO5IRkMBmFXVi_xeEh_lA');
+  const { tokens } = await oauth2Client.getToken('4/0AcvDMrCUgFQX2bxyMdyyHnG7ZxyvQ6SV0YKqobioxQKYLgnxWWH3pGm2NhvmZhYOYKJhvg');
   console.log(tokens);
 }
 

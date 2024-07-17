@@ -12,10 +12,12 @@ import { Alumno } from 'src/alumnos/alumnos.model';
 import { Asesor } from 'src/asesores/asesores.model';
 import { ODSservice } from 'src/ods/ods.service';
 import { KeywordsService } from 'src/keywords/keywords.service';
+import { GoogleDriveService } from 'src/google-drive/google-drive.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
     imports: [SequelizeModule.forFeature([Profesor, TrabajosInvestigacion, Alumno, Asesor, ODS, Keyword])],
     controllers: [ProfesoresController],
-    providers: [ProfesoresService, AlumnosService, AsesoresService, ODSservice, KeywordsService],
+    providers: [ProfesoresService, AlumnosService, AsesoresService, ODSservice, KeywordsService, GoogleDriveService, ConfigService],
 })
 export class ProfesoresModule {}
